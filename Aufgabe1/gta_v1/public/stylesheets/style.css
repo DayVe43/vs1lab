@@ -4,9 +4,57 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #111111;
 }
 
-header {
-  background: ivory;
+#taglist{
+  display:flex;
+  flex-direction: row;
+  width:33%;
+}
+.discovery{
+
+  width:60%;
+}
+main{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+header,footer{
+  background: darksalmon;
+  padding:15px;
+  border-radius: 5px;
+}
+
+footer {
+
+}
+
+fieldset{
+  border-radius: 4px;
+}
+
+input {
+  margin: 3px;
+  border-radius: 4px;
+}
+
+label {
+  font-weight: bold;
+  color:darksalmon;
+}
+
+#results li {
+  display:block;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: darksalmon;
+  border-radius: 4px;
+}
+
+ul {
+  list-style-type: none;
+  padding:2px;
 }
