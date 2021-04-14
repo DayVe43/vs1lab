@@ -22,7 +22,7 @@
 
 		<main>
 
-			<section class="tagging">
+			<section class="tagging" >
 				<h2>Tagging</h2>
 
 				<!-- ############### Aufgabe1a Form1 Start -->
@@ -32,15 +32,15 @@
 						<label>Latitude:</label>		<input type="text" id="tag_latitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required>
 						<label>Longitude:</label>		<input type="text" id="tag_longitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required>
 						<label>Name:</label>			<input type="text" id="tag_name" placeholder="Castle" pattern=".+" maxlength="10" required>
-						<label>Hashtag:	</label>	<input type="text" id="tag_hashtag" placeholder="#hashtag" pattern="#\S+" maxlength="11">
-						<input type="submit" value="Submit!">
+						<label>Hashtag:	</label>		<input type="text" id="tag_hashtag" placeholder="#hashtag" pattern="#\S+" maxlength="11">
+						<input id= "TagSubmit" type="submit" value="Submit!">
 					</fieldset>
 				</form>
 				<!-- ############### Aufgabe1a Form1 Ende -->
 
 			</section>
 
-			<section class="discovery">
+			<section class="discovery" >
 				<h2>Discovery</h2>
 
 				<!-- ############### Aufgabe1a Form2 Start -->
@@ -54,19 +54,18 @@
 					</fieldset>
 				</form>
 				<!-- ############### Aufgabe1a Form2 Ende -->
-
-				<div class="taglist">
-					<ul id="results">
-						<li>Castle (49.01379, 8.404435) #sight</li>
-						<li>IWI (49.01379, 8.390071) #edu</li>
-					</ul>
+				<div class="zwischendrin">
+					<div class="taglist">
+						<ul id="results">
+							<li>Castle (49.01379, 8.404435) #sight</li>
+							<li>IWI (49.01379, 8.390071) #edu</li>
+						</ul>
+					</div>
+					<div class="tagmap">
+						<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
+						<div class="caption">Result map</div>
+					</div>
 				</div>
-
-				<div class="tagmap">
-					<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
-					<div class="caption">Result map</div>
-				</div>
-
 			</section>
 
 		</main>
