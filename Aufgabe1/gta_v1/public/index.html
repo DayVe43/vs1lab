@@ -28,12 +28,12 @@
 				<!-- ############### Aufgabe1a Form1 Start -->
 				<form id="tag-form" action="/tagging" method="post">
 					<fieldset>
-						<legend>Neuen Tag hinzufügen:</legend>
+						<legend>Insert a new tag:</legend>
 						<label>Latitude:</label>		<input type="text" id="tag_latitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required>
 						<label>Longitude:</label>		<input type="text" id="tag_longitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required>
 						<label>Name:</label>			<input type="text" id="tag_name" placeholder="Castle" pattern=".+" maxlength="10" required>
 						<label>Hashtag:	</label>	<input type="text" id="tag_hashtag" placeholder="#hashtag" pattern="#\S+" maxlength="11">
-						<input type="submit" value="Submit!">
+						<input id="tag_submit" type="submit" value="Submit!">
 					</fieldset>
 				</form>
 				<!-- ############### Aufgabe1a Form1 Ende -->
@@ -46,18 +46,19 @@
 				<!-- ############### Aufgabe1a Form2 Start -->
 				<form id="filter-form" action="/discovery" method="post">
 					<fieldset>
-						<legend>Tag suchen:</legend>
+						<legend>Search for a tag:</legend>
 						<label>Search:</label>		<input type="search" id="filter_search" placeholder="IWI" pattern=".+">
 													<input type="text" id="filter_latitude" pattern="[0-9]+([.][0-9]+)?" hidden>
 													<input type="text" id="filter_longitude" pattern="[0-9]+([.][0-9]+)?" hidden>
-						<input type="submit" value="GO!">
+						<input id="tag_go" type="submit" value="GO!">
 					</fieldset>
 				</form>
 				<!-- ############### Aufgabe1a Form2 Ende -->
 
+				<div class="right">
 				<div class="taglist">
 					<ul id="results">
-						<li>Castle (49.01379, 8.404435) #sight</li>
+						<li> Castle (49.01379, 8.404435) #sight</li>
 						<li>IWI (49.01379, 8.390071) #edu</li>
 					</ul>
 				</div>
@@ -66,7 +67,7 @@
 					<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
 					<div class="caption">Result map</div>
 				</div>
-
+				</div>
 			</section>
 
 		</main>
