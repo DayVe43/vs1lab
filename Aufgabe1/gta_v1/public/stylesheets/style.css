@@ -43,7 +43,7 @@ input {
 
 label {
   font-weight: bold;
-  color:darksalmon;
+  color:#d93d2b;
 }
 
 #results li {
@@ -58,3 +58,5 @@ ul {
   list-style-type: none;
   padding:2px;
 }
+
+media
