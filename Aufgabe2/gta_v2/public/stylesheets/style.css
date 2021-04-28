@@ -1,0 +1,113 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #111111;
+}
+
+#taglist{
+  display:flex;
+  flex-direction: row;
+  width:33%;
+}
+.discovery{
+
+  width:60%;
+}
+main{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+header,footer{
+  background: darksalmon;
+  padding:15px;
+  border-radius: 5px;
+}
+
+footer {
+
+}
+
+fieldset{
+  border-radius: 4px;
+}
+
+input {
+  margin: 3px;
+  border-radius: 4px;
+}
+
+label {
+  font-weight: bold;
+  color:#d93d2b;
+}
+
+#results li {
+  display:block;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: darksalmon;
+  border-radius: 4px;
+}
+
+ul {
+  list-style-type: none;
+  padding:2px;
+}
+
+.tagging {
+  width: 25%;
+}
+
+.discovery {
+  width: 73%;
+}
+
+.discovery_listmap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.tagmap {
+  width: 438px;
+}
+
+.taglist {
+  width: 100%;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 950px) {
+  main {
+    flex-direction: column;
+  }
+  .tagging {
+    width: 100%;
+  }
+
+  .discovery {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .discovery_listmap {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width: 570px) {
+  .tagmap {
+    width: 100%;
+  }
+
+  #result-img {
+    width: 100%;
+  }
+}
