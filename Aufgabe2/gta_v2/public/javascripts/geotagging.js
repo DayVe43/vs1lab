@@ -37,7 +37,6 @@ GEOLOCATIONAPI = navigator.geolocation;
  * GeoTagApp Locator Modul
  */
 var gtaLocator = (function GtaLocator(geoLocationApi) {
-
     // Private Member
 
     /**
@@ -120,7 +119,11 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
         readme: "Dieses Objekt enthält 'öffentliche' Teile des Moduls.",
 
         updateLocation: function() {
-            // TODO Hier Inhalt der Funktion "update" ergänzen
+            tryLocate( function(position) {
+                getLatitude(), getLongitude();
+            }, function (msg) {
+                alert(msg);
+            })
         }
 
     }; // ... Ende öffentlicher Teil
@@ -134,4 +137,7 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
 $(function() {
     alert("Please change the script 'geotagging.js'");
     // TODO Hier den Aufruf für updateLocation einfügen
+    function updateLocation() {
+
+    };
 });
