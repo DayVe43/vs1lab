@@ -120,7 +120,11 @@
             readme: "Dieses Objekt enthält 'öffentliche' Teile des Moduls.",
 
             updateLocation: function() {
-                // TODO Hier Inhalt der Funktion "update" ergänzen
+                tryLocate( function() {
+
+                } , function (msg) {
+                    alert(msg);
+                });
             }
 
         }; // ... Ende öffentlicher Teil
