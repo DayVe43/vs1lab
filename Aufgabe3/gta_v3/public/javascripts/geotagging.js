@@ -120,7 +120,7 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
         readme: "Dieses Objekt enthält 'öffentliche' Teile des Moduls.",
 
         updateLocation: function() {
-            if (document.getElementById("tag_latitude").value === "" && document.getElementById("tag_longitude").value === "" && document.getElementById("filter_longitude").value === "" && document.getElementById("filter_latitude").value === "") {
+            if (document.getElementById("tag_latitude").value == "" || document.getElementById("tag_longitude").value == "") {
                 tryLocate(function (position) {
                     console.log("tryLocate wird ausgeführt!")
                     let latitude = getLatitude(position);
@@ -130,13 +130,18 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
                     document.getElementById("filter_latitude").value = latitude;
                     document.getElementById("filter_longitude").value = longitude;
 
-                    let source = getLocationMapSrc(latitude, longitude, [] , 14);
+                    let source = getLocationMapSrc(latitude, longitude, JSON.parse(document.querySelector(".tagmap img").dataset.tags) , 14);
 
                     document.querySelector(".tagmap img").src = source;
 
                 }, function (msg) {
                     alert(msg);
                 });
+            }
+            else {
+                let source = getLocationMapSrc(document.getElementById("tag_latitude").value, document.getElementById("tag_longitude").value, JSON.parse(document.querySelector(".tagmap img").dataset.tags) , 14);
+
+                document.querySelector(".tagmap img").src = source;
             }
 
         }
