@@ -36,11 +36,11 @@ app.use(express.static(__dirname + "/public"));
  * GeoTag Objekte sollen min. alle Felder des 'tag-form' Formulars aufnehmen.
  */
 
-function GeoTag (latitude, longitude, hashtag, name) {
+function GeoTag (latitude, longitude, name, hashtag) {
     this.latitude = latitude;
     this.longitude = longitude;
-    this.hashtag = hashtag;
     this.name = name;
+    this.hashtag = hashtag;
 }
 
 /**
@@ -52,50 +52,55 @@ function GeoTag (latitude, longitude, hashtag, name) {
  * - Funktion zum Löschen eines Geo Tags.
  */
 
-let InMemoryModule = (function () {
+var InMemoryModule = (function () {
     let memory = [];
 
     return {
-        SearchRad: function (rad, koords) {
+        SearchRad : function (rad, lat, long) {
             let ret = [];
             memory.forEach(function (obj) {
-                if (Math.sqrt(Math.pow(obj.latitude - koords.latitude, 2) + Math.pow(obj.longitude - koords.longitude, 2)) <= rad) {
+                if (Math.sqrt(Math.pow(obj.latitude - lat, 2) + Math.pow(obj.longitude - long, 2)) <= rad) {
                     ret.push(obj);
                 }
             })
             return ret;
         },
-        SearchWord : function (word) {
+
+        SearchTerm : function (mem, term) {
             let ret = [];
-            memory.forEach(function (obj) {
-                if (obj.name.toUpperCase().contains(word.toUpperCase()) || obj.hashtag.toUpperCase().contains(word.toUpperCase())) {
+            mem.forEach(function (obj) {
+                if(obj.name.toUpperCase().includes(term.toUpperCase()) || obj.hashtag.toUpperCase().includes(term.toUpperCase())) {
                     ret.push(obj);
                 }
             })
             return ret;
         },
-        addGeoTag : function (geo) {
+
+        AddGeoTag : function (geo) {
             let contains = false;
             memory.forEach(function (obj) {
-                if (obj.name == geo.name) {
+                if(obj.name === geo.name) {
                     contains = true;
                 }
             })
+
             if (contains == false) {
                 memory.push(geo);
             }
+
         },
-        removeGeoTag : function (name) {
+
+        RemoveGeoTag : function (name) {
+
             memory.forEach(function (obj) {
-                if (obj.name.equals(name)) {
-                    memory.splice(memory.indexOf(obj), 1)
+                if(obj.name === name) {
+                    memory.splice(memory.indexOf(obj), 1);
                 }
             })
-        },
-        getMemory : function () {
-            return this.memory;
         }
+
     }
+
 })();
 
 /**
@@ -109,7 +114,9 @@ let InMemoryModule = (function () {
 
 app.get('/', function(req, res) {
     res.render('gta', {
-        taglist: []
+        taglist: [],
+        reslatitude : null,
+        reslongitude: null,
     });
 });
 
@@ -126,13 +133,18 @@ app.get('/', function(req, res) {
  * Die Objekte liegen in einem Standard Radius um die Koordinate (lat, lon).
  */
 
-app.post('/tagging', function (req, res){
-    var tag = new GeoTag (req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
-    InMemoryModule.addGeoTag(tag);
+app.post("/tagging", function(req, res){
+    let tag = new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
+
+    InMemoryModule.AddGeoTag(tag);
+
     res.render('gta', {
-        taglist: InMemoryModule.getMemory,
-    });
-});
+        taglist : InMemoryModule.SearchRad(0.5, req.body.latitude, req.body.longitude),
+        reslatitude : req.body.latitude,
+        reslongitude : req.body.longitude,
+    })
+
+})
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
@@ -146,9 +158,14 @@ app.post('/tagging', function (req, res){
  * Falls 'term' vorhanden ist, wird nach Suchwort gefiltert.
  */
 
-app.post('/discovery', function (req, res){
+app.post("/discovery", function(req, res){
 
-});
+    res.render('gta', {
+        taglist : InMemoryModule.SearchTerm(InMemoryModule.SearchRad(0.5, req.body.latitude, req.body.longitude), req.body.search),
+        reslatitude : req.body.latitude,
+        reslongitude : req.body.longitude,
+    })
+})
 
 /**
  * Setze Port und speichere in Express.
