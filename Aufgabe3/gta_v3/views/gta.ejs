@@ -30,9 +30,9 @@
 			<fieldset>
 				<legend>Enter a new GeoTag</legend>
 				<label>Latitude:</label>		<input name="latitude" type="text" id="tag_latitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required value =
-					<%if (reslatitude !== undefined) { %>
-					"<%=reslatitude_%>"
-					<%} %>>
+				<%if (reslatitude !== undefined) { %>
+				"<%=reslatitude_%>"
+						<%} %>>
 				<label>Longitude:</label>		<input name="longitude" type="text" id="tag_longitude" placeholder="49.01379" pattern="[0-9]+([.][0-9]+)?" required value =
 				<%if (reslongitude !== undefined) { %>
 				"<%=reslongitude_%>"
@@ -77,7 +77,10 @@
 			</div>
 
 			<div class="tagmap">
-				<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
+				<img id="result-img" src="./images/mapview.jpg" alt="a map with locations" data-tags=
+				<%if (taglist !== undefined) {%>
+				"<%=JSON.stringify(taglist)%>"
+						<%}%>>
 				<div class="caption">Result map</div>
 			</div>
 		</section>
@@ -98,5 +101,3 @@
 
 </body>
 </html>
-
-
